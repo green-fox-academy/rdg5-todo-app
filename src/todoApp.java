@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,6 +18,8 @@ public class todoApp {
       taskReader();
     } else if (args.length != 0 && args[0].equals("-a")) {
       taskAdder(args);
+    } else if (args.length != 0 && args[0].equals("-r")) {
+      taskRemover(args);
     }
   }
 
@@ -58,5 +61,18 @@ public class todoApp {
         + " -a   Adds a new task\n"
         + " -r   Removes an task\n"
         + " -c   Completes an task");
+  }
+
+  public static void taskRemover(String[] args) {
+    Path listPath = Paths.get("../tasks.txt");
+    try {
+      List<String> lines = Files.readAllLines(listPath);
+      int taskLineNumber = Integer.parseInt(args[0]);
+      lines.remove(taskLineNumber);
+
+    } catch (IOException | NumberFormatException e) {
+      System.out.println("Unable to remove: no index provided");
+    }
+
   }
 }
