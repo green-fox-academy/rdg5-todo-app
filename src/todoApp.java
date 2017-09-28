@@ -8,37 +8,33 @@ import java.util.List;
 
 public class todoApp {
 
-
-
- // if args.equals("-h") sout blbla.
+  // if args.equals("-h") sout blbla.
 
   public static void main(String[] args) {
     if (args.length == 0) {
       printUsage();
-    } if (args[0].equals("-l")){
+    } else if (args.length != 0 && args[0].equals("-l")) {
       taskReader();
-    } if (args[0].equals("-a")){
-      
+    } else if (args.length != 0 && args[0].equals("-a")) {
+      taskAdder(args);
     }
-
   }
-
 
   public static void taskAdder(String[] args) {
     try {
-      Path listPath = Paths.get("tasks.txt");
+      Path listPath = Paths.get("../tasks.txt");
       List<String> lines = Files.readAllLines(listPath);
       lines.add(args[1]);
-      Files.write(listPath, lines, Charset.defaultCharset());
+      Files.write(listPath, lines);
     } catch (Exception e) {
-      System.out.println("Uh-oh, could not write the file!");
+      System.out.println("Unable to add: no task provided!");
     }
   }
 
 
   public static void taskReader() {
     try {
-      Path listPath = Paths.get("tasks.txt");
+      Path listPath = Paths.get("../tasks.txt");
       List<String> lines = Files.readAllLines(listPath);
       int taskNumber = 1;
       if (lines.get(0) != null) {
