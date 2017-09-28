@@ -8,15 +8,18 @@ import java.util.List;
 
 public class todoApp {
 
-  String task;
-  boolean completed;
 
+
+ // if args.equals("-h") sout blbla.
 
   public static void main(String[] args) {
-    printUsage();
-    taskReader();
-//    taskAdder(new String[]{"jóskafiú"});
-
+    if (args.length == 0) {
+      printUsage();
+    } if (args[0].equals("-l")){
+      taskReader();
+    } if (args[0].equals("-a")){
+      
+    }
 
   }
 
